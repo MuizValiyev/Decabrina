@@ -1,0 +1,40 @@
+.mainNav {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #9F938F;
+    height: 75px;
+    position: sticky;
+    top: 0;
+}
+
+.boxNavCenter {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    max-width: 1440px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.boxNavCenter a {
+    padding: 10px;
+    gap: 10px;
+}
+
+.boxSearch {
+    width: 100%;
+    height: 100%;
+    max-width: 245px;
+    max-height: 35px;
+    gap: 10px;
+}
+
+.boxSearch button {
+    width: 35px;
+    height: 35px;
+    border-radius: 2px;
+    background-color: #CAC1C0;
+}
