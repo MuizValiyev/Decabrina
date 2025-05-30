@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./nav.module.css";
@@ -7,6 +7,14 @@ import { motion, AnimatePresence } from "motion/react";
 
 export default function Nav() {
   const [modal, setModal] = useState(false);
+
+  useEffect(() => {
+    if (modal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [modal])
 
   return (
     <>

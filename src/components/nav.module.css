@@ -8,6 +8,7 @@
     height: 75px;
     position: sticky;
     top: 0;
+    z-index: 1000;
 }
 
 .boxNavCenter {
@@ -73,7 +74,7 @@
     cursor: pointer;
 }
 
-.boxLogo img:last-child {
+.boxLogo img:nth-child(3) {
     display: none;
 }
 
@@ -84,6 +85,9 @@
     height: calc(100vh - 75px);
     gap: 10px;
     align-items: center;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
 }
 
 .modal a{
@@ -96,7 +100,7 @@
 
 .boxSearchAdaptive{
     width: 95%;
-    display: flex;
+    display: none;
     flex-direction: row;
     padding: 10px;
     background-color: #fff;
@@ -110,7 +114,7 @@
 }
 
 .boxRowLanguage{
-    display: flex;
+    display: none;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -141,9 +145,15 @@
     .boxSearch{
         display: none;
     }
+    .boxSearchAdaptive, .boxRowLanguage{
+        display: flex;
+    }
 }
 
 @media screen and (max-width:550px) {
+    .burgerMenu img{
+        display: flex;
+    }
     .boxLogo img:nth-child(2) {
         display: none;
     }

@@ -29,3 +29,26 @@ body {
 button, a {
   cursor: pointer;
 }
+
+h1{
+  font-size: 60px;
+}
+
+h2{
+  font-size: 40px;
+}
+p{
+  font-size: 20px;
+}
+
+@media screen and (max-width:650px) {
+  h1{
+    font-size: 40px;
+  }
+  h2{
+    font-size: 30px;
+  }
+  p{
+    font-size: 14px;
+  }
+}
