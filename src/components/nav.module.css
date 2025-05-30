@@ -30,6 +30,8 @@
     max-width: 245px;
     max-height: 35px;
     gap: 10px;
+    flex-direction: row;
+    display: flex;
 }
 
 .boxSearch button {
@@ -37,4 +39,115 @@
     height: 35px;
     border-radius: 2px;
     background-color: #CAC1C0;
+}
+
+.boxInput {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    max-width: 200px;
+    width: 100%;
+    padding: 0px 10px;
+    border-radius: 2px;
+}
+
+.boxInput input {
+    outline: none;
+    width: 100%;
+    height: 100%;
+}
+
+.boxLogo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.burgerMenu {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.boxLogo img:last-child {
+    display: none;
+}
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    background-color: #9f938f;
+    height: calc(100vh - 75px);
+    gap: 10px;
+    align-items: center;
+}
+
+.modal a{
+    width: 95%;
+    padding: 10px 20px;
+    background-color: #CAC1C0;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.boxSearchAdaptive{
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+.boxSearchAdaptive input{
+    background-color: #fff;
+    width: 100%;
+    outline: none;
+}
+
+.boxRowLanguage{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+}
+
+.oneLanguage{
+    width: 30%;
+    background-color: #CAC1C0;
+    border-radius: 2px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+@media screen and (max-width:1100px) {
+    .boxNavCenter a {
+        display: none;
+    }
+
+    .burgerMenu {
+        display: flex;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .boxSearch{
+        display: none;
+    }
+}
+
+@media screen and (max-width:550px) {
+    .boxLogo img:nth-child(2) {
+        display: none;
+    }
+    .boxLogo img:last-child{
+        display: block;
+    }
 }
