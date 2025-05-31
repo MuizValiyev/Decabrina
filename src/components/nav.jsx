@@ -35,7 +35,7 @@ export default function Nav() {
             </Link>
           </div>
           <Link href="#" className={styles.oneLinkNav}>продукция</Link>
-          <Link href="#" className={styles.oneLinkNav}>о предприятии</Link>
+          <Link href="/about" className={styles.oneLinkNav}>о предприятии</Link>
           <Link href="#" className={styles.oneLinkNav}>доставка</Link>
           <div className={styles.boxSearch}>
             <button>RU</button>
@@ -58,7 +58,7 @@ export default function Nav() {
             transition={{ duration: 0.1 }}
             className={styles.modal}>
             <Link href="#">продукция</Link>
-            <Link href="#">о предприятии</Link>
+            <Link href="/about">о предприятии</Link>
             <Link href="#">доставка</Link>
             <div className={styles.boxSearchAdaptive}>
                 <input type="search" placeholder="поиск" />

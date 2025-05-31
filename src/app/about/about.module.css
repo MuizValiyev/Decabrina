@@ -42,6 +42,8 @@
 
 .boxInfo img{
     height: fit-content;
+    position: sticky;
+    top: 100px;
 }
 
 
