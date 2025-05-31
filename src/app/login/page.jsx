@@ -3,53 +3,103 @@ import Image from "next/image";
 import styles from "./login.module.css";
 import { useState } from "react";
 
+import useApi from "@/utils/api";
+
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
 export default function Login() {
-  const [login, setLogin] = useState(1);
+  const api = useApi();
+
+  const [login, setLogin] = useState(null);
 
   const [email, setEmail] = useState("");
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const isValidName = firstName === "" || lastName === "";
-
+  
   const [password, setPassword] = useState("");
   const isValidPassword = password.length >= 8;
+  
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const isValidName = firstName !== "" && lastName !== "" && password.length >= 8;
+  
+  const handleCheckEmail = async () => {
+    try {
+      const response = await api.post("check-email/", {
+        email: email,
+      });
+      console.log(response.data);
+      setLogin(response.data.registered);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  
+  const handleRegistred = async () => {
+    try{
+      const response = await api.post("register/", {
+        email:email,
+        first_name: firstName,
+        last_name:lastName,
+        password:password,
+      });
+      console.log(response.data);
+      setLogin(response.data.registered);
+      window.location.href = '/';
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  
+  const handleLogin = async () => {
+    try {
+      const response = await api.post("login/", {
+        email: email,
+        password: password,
+      });
+      console.log(response.data);
+      window.location.href = '/';
+    } catch(error) {
+      console.error(error);
+    }
+  }
 
   return (
     <>
       <Nav />
       <div className={styles.mainContainer}>
-        {login === 1 && (
+        {login === null && (
           <>
             <h1>Вход или регистрация</h1>
             <div className={styles.boxForm}>
               <div className={styles.boxOneInput}>
                 <h6>E-mail</h6>
                 <input
-                  type="email"
+                  type="email" name="email"
                   placeholder="Введите e-mail"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <button onClick={() => setLogin(2)} disabled={!isValidEmail}>
+              <button onClick={handleCheckEmail} disabled={!isValidEmail}>
                 Далее
               </button>
             </div>
           </>
         )}
-        {login === 2 && (
+        {login === false && (
           <>
             <h1>Регистрация</h1>
             <div className={styles.boxForm}>
               <div className={styles.boxOneInput}>
                 <h6>Имя</h6>
                 <input
-                  type="text"
+                  type="name"
+                  name="name"
                   placeholder="Введите имя"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -59,32 +109,51 @@ export default function Login() {
                 <h6>Фамилия</h6>
                 <input
                   type="text"
+                  name="lastName"
                   placeholder="Введите фамилию"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
+              <div className={styles.boxOneInput}>
+                <h6>Пароль</h6>
+                <input
+                  type="text"
+                  placeholder="Придумайте пароль"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
               <div className={styles.boxButtons}>
-                <button onClick={() => setLogin(1)}>Назад</button>
-                <button onClick={() => setLogin(3)} disabled={isValidName}>Далее</button>
+                <button onClick={() => setLogin(null)}>Назад</button>
+                <button onClick={handleRegistred} disabled={!isValidName}>
+                  Далее
+                </button>
               </div>
             </div>
           </>
         )}
-        {login === 3 && (
-            <>
-                <h1>Верификация</h1>
-                <div className={styles.boxForm}>
-                    <div className={styles.boxOneInput}>
-                        <h6>Пароль</h6>
-                        <input type="text" placeholder="Введите пароль" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                    </div>
-                    <div className={styles.boxButtons}>
-                        <button onClick={() => setLogin(2)}>Назад</button>
-                        <button onClick={() => setLogin(4)} disabled={!isValidPassword}>Войти</button>
-                    </div>
-                </div>
-            </>
+        {login === true && (
+          <>
+            <h1>Вход</h1>
+            <div className={styles.boxForm}>
+              <div className={styles.boxOneInput}>
+                <h6>Пароль</h6>
+                <input
+                  type="text"
+                  placeholder="Введите пароль"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className={styles.boxButtons}>
+                <button onClick={() => setLogin(null)}>Назад</button>
+                <button onClick={handleLogin} disabled={!isValidPassword}>
+                  Войти
+                </button>
+              </div>
+            </div>
+          </>
         )}
       </div>
       <Footer />
