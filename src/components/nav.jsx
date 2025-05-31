@@ -36,7 +36,7 @@ export default function Nav() {
           </div>
           <Link href="#" className={styles.oneLinkNav}>продукция</Link>
           <Link href="/about" className={styles.oneLinkNav}>о предприятии</Link>
-          <Link href="#" className={styles.oneLinkNav}>доставка</Link>
+          <Link href="/delivery" className={styles.oneLinkNav}>доставка</Link>
           <div className={styles.boxSearch}>
             <button>RU</button>
             <div className={styles.boxInput}>
@@ -59,7 +59,7 @@ export default function Nav() {
             className={styles.modal}>
             <Link href="#">продукция</Link>
             <Link href="/about">о предприятии</Link>
-            <Link href="#">доставка</Link>
+            <Link href="/delivery">доставка</Link>
             <div className={styles.boxSearchAdaptive}>
                 <input type="search" placeholder="поиск" />
                 <button><Image src="/search.svg" alt="search" width={24} height={24} /></button>
