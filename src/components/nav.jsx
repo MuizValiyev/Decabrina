@@ -21,10 +21,7 @@ export default function Nav() {
       <div className={styles.mainNav}>
         <div className={styles.boxNavCenter}>
           <div className={styles.boxLogo}>
-            <button
-              onClick={() => setModal(!modal)}
-              className={styles.burgerMenu}
-            >
+            <button onClick={() => setModal(!modal)} className={styles.burgerMenu}>
               <Image
                 src="/burger.svg"
                 alt="burger menu"
@@ -32,17 +29,14 @@ export default function Nav() {
                 height={40}
               />
             </button>
-            <Image
-              src="/decabrinaLogo.svg"
-              alt="logo"
-              width={408}
-              height={46}
-            />
-            <Image src="/logoAdaptive.svg" alt="logo" width={144} height={20} />
+            <Link href={"/"} className={styles.boxLogoLink}>
+              <Image src="/decabrinaLogo.svg" alt="logo" width={408} height={46} />
+              <Image src="/logoAdaptive.svg" alt="logo" width={144} height={20} />
+            </Link>
           </div>
-          <Link href="#">продукция</Link>
-          <Link href="#">о предприятии</Link>
-          <Link href="#">доставка</Link>
+          <Link href="#" className={styles.oneLinkNav}>продукция</Link>
+          <Link href="#" className={styles.oneLinkNav}>о предприятии</Link>
+          <Link href="#" className={styles.oneLinkNav}>доставка</Link>
           <div className={styles.boxSearch}>
             <button>RU</button>
             <div className={styles.boxInput}>
