@@ -52,7 +52,7 @@
 }
 
 .openFilter{
-    display: flex;
+    display: none;
     flex-direction: row;
     width: min-content;
     padding: 10px 20px;
@@ -77,6 +77,7 @@
     height: 510px;
     background-color: #CAC1C0;
     padding: 15px;
+    border-radius: 2px;
 }
 
 .boxOneProduct img{
@@ -137,6 +138,10 @@
 @media screen and (max-width:800px) {
     .filter{
         display: none;
+    }
+
+    .openFilter{
+        display: flex;
     }
 
     .boxFilterAndCatalog{
