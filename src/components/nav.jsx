@@ -4,9 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./nav.module.css";
 import { motion, AnimatePresence } from "motion/react";
+import Cookies from "js-cookie";
+
 
 export default function Nav() {
   const [modal, setModal] = useState(false);
+  const [accountOrCart, setAccountOrCart] = useState(1);
+
+    useEffect(() => {
+      if (Cookies.get("access_token")) {
+        setAccountOrCart(2);
+      }
+    }, [])
+
 
   useEffect(() => {
     if (modal) {
@@ -44,9 +54,15 @@ export default function Nav() {
               <Image src="/search.svg" alt="search" width={24} height={24} />
             </div>
           </div>
-          <button>
+          {accountOrCart !== 1 ? (
+          <Link href="/cart">
             <Image src="/cart.svg" alt="cart" width={28} height={20} />
-          </button>
+          </Link>
+          ) : (
+            <Link href="/login" className={styles.boxAccount}>
+              <Image src="/login.svg" alt="login" width={24} height={24}/>
+            </Link>
+          )}
         </div>
       </div>
       <AnimatePresence>
