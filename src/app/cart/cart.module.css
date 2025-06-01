@@ -1,0 +1,7 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 301px);
+    align-items: center;
+    gap: 50px;
+}
