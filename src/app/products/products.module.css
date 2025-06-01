@@ -5,4 +5,160 @@
     justify-content: center;
     align-items: center;
     gap: 50px;
+    padding: 20px 0px;
+}
+
+.boxFilterAndCatalog{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 95%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0px;
+    gap: 20px;
+}
+
+.filter{
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.boxFilter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 300px;
+    width: 100%;
+    padding: 0px;
+    gap: 10px;
+}
+
+.boxOneTypeFilter{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.boxCatalog{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+}
+
+.openFilter{
+    display: flex;
+    flex-direction: row;
+    width: min-content;
+    padding: 10px 20px;
+    background-color: #CAC1C0;
+    border-radius: 2px;
+}
+
+.closeFilter{
+    display: flex;
+    flex-direction: row;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+}
+
+.boxOneProduct{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 350px;
+    width: 100%;
+    height: 510px;
+    background-color: #CAC1C0;
+    padding: 15px;
+}
+
+.boxOneProduct img{
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    height: 80%;
+}
+
+.mainFilterAdaptive{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    background-color: #9F938F;
+    z-index: 1000;
+    padding: 20px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.filterAdaptiveRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.boxFilterAdaptive2{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.filterApply{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: #CAC1C0;
+    border-radius: 2px;
+}
+
+@media screen and (max-width:1100px) {
+    .boxCatalog{
+        grid-template-columns: auto auto;
+    }
+    .boxOneProduct{
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .filter{
+        display: none;
+    }
+
+    .boxFilterAndCatalog{
+        flex-direction: column;
+        align-items: end;
+    }
+}
+
+@media screen and (max-width:650px) {
+    .boxOneProduct{
+        height: 400px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .boxOneProduct{
+        height: 350px;
+    }
+}
+
+@media screen and (max-width:430px) {
+    .boxOneProduct{
+        height: 300px;
+    }
 }
