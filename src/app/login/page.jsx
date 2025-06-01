@@ -7,6 +7,7 @@ import useApi from "@/utils/api";
 
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const api = useApi();
@@ -38,7 +39,7 @@ export default function Login() {
 
   
   const handleRegistred = async () => {
-    try{
+    try {
       const response = await api.post("register/", {
         email:email,
         first_name: firstName,
@@ -47,6 +48,8 @@ export default function Login() {
       });
       console.log(response.data);
       setLogin(response.data.registered);
+      Cookies.set("access_token", response.data.tokens.access, { expires: 7 });
+      Cookies.set("refresh_token", response.data.tokens.refresh, { expires: 7 });
       window.location.href = '/';
       return response.data;
     } catch (error) {
@@ -63,6 +66,8 @@ export default function Login() {
       });
       console.log(response.data);
       window.location.href = '/';
+      Cookies.set("access_token", response.data.tokens.access, { expires: 7 });
+      Cookies.set("refresh_token", response.data.tokens.refresh, { expires: 7 });
     } catch(error) {
       console.error(error);
     }
