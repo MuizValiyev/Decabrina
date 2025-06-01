@@ -1,0 +1,38 @@
+.LanguageSwitcher {
+    width: 35px;
+    height: 35px;
+    border-radius: 2px;
+    background-color: #CAC1C0;
+}
+
+.LanguageSwitcher button img {
+    cursor: pointer;
+}
+
+.LanguageModal {
+    display: flex;
+    flex-direction: column;
+    background-color: #CAC1C0;
+    border-radius: 2px;
+}
+
+.LanguageModal button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width:845px) {
+    .LanguageModal {
+        right: 10px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .languageButtonActive {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+    }
+}

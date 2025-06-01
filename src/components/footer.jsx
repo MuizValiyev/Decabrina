@@ -10,7 +10,7 @@ export default function Footer() {
                 <div className={styles.boxRowFooter}>
                     <div className={styles.boxColumnFooter}>
                         <Link href="/">главная</Link>
-                        <Link href="#">продукция</Link>
+                        <Link href="/products">продукция</Link>
                         <Link href="/about">о предприятии</Link>
                         <Link href="/delivery">доставка</Link>
                     </div>

@@ -5,8 +5,11 @@ import Link from "next/link";
 import styles from "./nav.module.css";
 import { motion, AnimatePresence } from "motion/react";
 import Cookies from "js-cookie";
+import { useLanguage } from "@/context/languageContext";
+import LanguageSwitcher from "./language";
 
 export default function Nav() {
+  const {translate, language, setLanguage } = useLanguage();
   const [modal, setModal] = useState(false);
   const [accountOrCart, setAccountOrCart] = useState(1);
 
@@ -23,6 +26,11 @@ export default function Nav() {
       document.body.style.overflow = "auto";
     }
   }, [modal]);
+
+    const changeLanguage = (lang) => {
+        setLanguage(lang)
+        handleLanguageModal()
+    }
 
   return (
     <>
@@ -55,8 +63,8 @@ export default function Nav() {
               />
             </Link>
           </div>
-          <Link href="#" className={styles.oneLinkNav}>
-            продукция
+          <Link href="/products" className={styles.oneLinkNav}>
+            {translate("продукция")}
           </Link>
           <Link href="/about" className={styles.oneLinkNav}>
             о предприятии
@@ -65,7 +73,7 @@ export default function Nav() {
             доставка
           </Link>
           <div className={styles.boxSearch}>
-            <button>RU</button>
+            <LanguageSwitcher />
             <>
               {accountOrCart !== 1 ? (
                 <Link href="/cart">
@@ -89,13 +97,13 @@ export default function Nav() {
             transition={{ duration: 0.1 }}
             className={styles.modal}
           >
-            <Link href="#">продукция</Link>
+            <Link href="/products">продукция</Link>
             <Link href="/about">о предприятии</Link>
             <Link href="/delivery">доставка</Link>
             <div className={styles.boxRowLanguage}>
-              <button className={styles.oneLanguage}>RU</button>
-              <button className={styles.oneLanguage}>UZ</button>
-              <button className={styles.oneLanguage}>EN</button>
+              <button onClick={() => changeLanguage("ru")} className={styles.oneLanguage}>RU</button>
+              <button onClick={() => changeLanguage("uz")} className={styles.oneLanguage}>UZ</button>
+              <button onClick={() => changeLanguage("en")} className={styles.oneLanguage}>EN</button>
             </div>
           </motion.div>
         )}
