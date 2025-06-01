@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./products.module.css";
+import styles from "./product.module.css";
 
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
