@@ -26,7 +26,7 @@ export default function Login() {
   
   const handleCheckEmail = async () => {
     try {
-      const response = await api.post("check-email/", {
+      const response = await api.post("users/check-email/", {
         email: email,
       });
       console.log(response.data);
@@ -37,10 +37,9 @@ export default function Login() {
     }
   };
 
-  
   const handleRegistred = async () => {
     try {
-      const response = await api.post("register/", {
+      const response = await api.post("users/register/", {
         email:email,
         first_name: firstName,
         last_name:lastName,
@@ -60,7 +59,7 @@ export default function Login() {
   
   const handleLogin = async () => {
     try {
-      const response = await api.post("login/", {
+      const response = await api.post("users/login/", {
         email: email,
         password: password,
       });
