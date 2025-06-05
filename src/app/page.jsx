@@ -1,86 +1,80 @@
+"use client";
 import Image from "next/image";
 import styles from "./home.module.css";
+import Link from "next/link";
 
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
+import useApi from "@/utils/api";
+import { useQuery } from "@tanstack/react-query";
+
 export default function Home() {
+  const api = useApi();
+
+  const fetchCategories = async () => {
+    const response = await api.get("products/categories/");
+    console.log("API Response: ", response.data);
+    return response.data;
+  };
+
+  const {
+    data: categories,
+    isLoading: isLoading,
+    isError: isError,
+  } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: false,
+    enabled: true,
+  });
+
   return (
     <>
       <Nav />
       <div className={styles.mainContainer}>
         <div className={styles.boxCategories}>
-          <div className={styles.oneCategory} style={{backgroundImage: `url('/inTrends.png')`}}>
-            <h1>В тренде</h1>
-          </div>
-          <div className={styles.oneCategory} style={{backgroundImage: `url('/inTrends.png')`}}>
-            <h1>В тренде</h1>
-          </div>
+          {categories?.map((item) =>
+            !item.trends ? (
+              <div
+                key={item.id}
+                className={styles.oneCategory}
+                style={{ backgroundImage: `url('${item.image}')` }}
+              >
+                <h1>{item.name}</h1>
+              </div>
+            ) : (
+              <Link
+                key={item.id}
+                href="#thrends"
+                className={styles.oneCategory}
+                style={{ backgroundImage: `url('${item.image}')` }}
+              >
+                <h1>{item.name}</h1>
+              </Link>
+            )
+          )}
         </div>
 
-        <div className={styles.boxThrends}>
+        <div id="thrends" className={styles.boxThrends}>
           <h1>Тренды</h1>
           <div className={styles.boxScroll}>
-            <div className={styles.oneThrend}>
-              <Image
-                src="/oneThrend.svg"
-                alt="oneThrend"
-                width={316}
-                height={440}
-              />
-              <h2>Название</h2>
-              <p>Цена</p>
-            </div>
-            <div className={styles.oneThrend}>
-              <Image
-                src="/oneThrend.svg"
-                alt="oneThrend"
-                width={316}
-                height={440}
-              />
-              <h2>Название</h2>
-              <p>Цена</p>
-            </div>
-            <div className={styles.oneThrend}>
-              <Image
-                src="/oneThrend.svg"
-                alt="oneThrend"
-                width={316}
-                height={440}
-              />
-              <h2>Название</h2>
-              <p>Цена</p>
-            </div>
-            <div className={styles.oneThrend}>
-              <Image
-                src="/oneThrend.svg"
-                alt="oneThrend"
-                width={316}
-                height={440}
-              />
-              <h2>Название</h2>
-              <p>Цена</p>
-            </div>
-            <div className={styles.oneThrend}>
-              <Image
-                src="/oneThrend.svg"
-                alt="oneThrend"
-                width={316}
-                height={440}
-              />
-              <h2>Название</h2>
-              <p>Цена</p>
-            </div>
-            <div className={styles.oneThrend}>
-              <Image
-                src="/oneThrend.svg"
-                alt="oneThrend"
-                width={316}
-                height={440}
-              />
-              <h2>Название</h2>
-              <p>Цена</p>
-            </div>
+            {categories
+              ?.find((category) => category.trends)
+              ?.products?.map((item) => (
+                <div key={item.id} className={styles.oneThrend}>
+                  <Image
+                    src={item.image || ""}
+                    alt="oneThrend"
+                    width={316}
+                    height={440}
+                  />
+                  <h2>{item.name}</h2>
+                  <p>{Number(item.price).toLocaleString('ru-RU').replace('.00', '')} сум</p>
+                </div>
+              ))}
           </div>
         </div>
 
