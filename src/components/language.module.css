@@ -29,6 +29,12 @@
     }
 }
 
+@media screen and (max-width:650px) {
+    .LanguageSwitcher{
+        display: none;
+    }
+}
+
 @media screen and (max-width:500px) {
     .languageButtonActive {
         width: 50px;

@@ -4,11 +4,34 @@ import Link from "next/link";
 import styles from "./products.module.css";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import useApi from "@/utils/api";
+import { useQuery } from "@tanstack/react-query";
 
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
 export default function Products() {
+  const api = useApi();
+
+  const fetchProducts = async () => {
+    const response = await api.get('products/products/');
+    console.log("API Response: ", response.data);
+    return response.data;
+  }
+
+    const {
+    data: products,
+    isLoading: isLoading,
+    isError: isError,
+  } = useQuery({
+    queryKey: ["productsData"],
+    queryFn: fetchProducts,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: false,
+    enabled: true,
+  });
+
   const [filterModal, setFilterModal] = useState(false);
 
   useEffect(() => {
@@ -27,21 +50,10 @@ export default function Products() {
           <div className={styles.filter}>
             <h1>Фильтр</h1>
             <div className={styles.boxFilter}>
-              <h2>Ткань</h2>
-              <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-              <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-              <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-              <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-              <h2>Ткань</h2>
-              <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-              <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-              <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-              <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-              <h2>Ткань</h2>
-              <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-              <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-              <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-              <div className={styles.boxOneTypeFilter}>Вид ткани</div>
+              <h2>Размер</h2>
+              <div className={styles.boxOneTypeFilter}>XS</div>
+              <div className={styles.boxOneTypeFilter}>S</div>
+              <div className={styles.boxOneTypeFilter}>M</div>
             </div>
           </div>
           <button
@@ -51,66 +63,20 @@ export default function Products() {
             Фильтр
           </button>
           <div className={styles.boxCatalog}>
-            <div className={styles.boxOneProduct}>
+            {products?.length > 0 ? (
+            products.map((item) => (
+            <Link href={`products/${item.id}`} key={item.id} className={styles.boxOneProduct}>
               <Image
-                src="/oneProduct.png"
+                src={item.image}
                 alt="product"
                 width={350}
                 height={350}
               />
-              <h2>Название</h2>
-              <p>цена</p>
-            </div>
-            <div className={styles.boxOneProduct}>
-              <Image
-                src="/oneProduct.png"
-                alt="product"
-                width={350}
-                height={350}
-              />
-              <h2>Название</h2>
-              <p>цена</p>
-            </div>
-            <div className={styles.boxOneProduct}>
-              <Image
-                src="/oneProduct.png"
-                alt="product"
-                width={350}
-                height={350}
-              />
-              <h2>Название</h2>
-              <p>цена</p>
-            </div>
-            <div className={styles.boxOneProduct}>
-              <Image
-                src="/oneProduct.png"
-                alt="product"
-                width={350}
-                height={350}
-              />
-              <h2>Название</h2>
-              <p>цена</p>
-            </div>
-            <div className={styles.boxOneProduct}>
-              <Image
-                src="/oneProduct.png"
-                alt="product"
-                width={350}
-                height={350}
-              />
-              <h2>Название</h2>
-              <p>цена</p>
-            </div>
-            <div className={styles.boxOneProduct}>
-              <Image
-                src="/oneProduct.png"
-                alt="product"
-                width={350}
-                height={350}
-              />
-              <h2>Название</h2>
-              <p>цена</p>
-            </div>
+              <h2>{item.name}</h2>
+              <p>{Number(item.price).toLocaleString('ru-RU').replace('.00', "")} сум</p>
+            </Link>
+            ))
+            ) : (<></>)}
           </div>
         </div>
       </div>
@@ -127,21 +93,10 @@ export default function Products() {
                 <div className={styles.boxFilterAdaptive2}>
                 <h1>Фильтр</h1>
                 <div className={styles.boxFilter}>
-                  <h2>Ткань</h2>
-                  <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-                  <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-                  <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-                  <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-                  <h2>Ткань</h2>
-                  <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-                  <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-                  <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-                  <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-                  <h2>Ткань</h2>
-                  <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-                  <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-                  <div className={styles.boxOneTypeFilter}>Вид ткани</div>
-                  <div className={styles.boxOneTypeFilter}>Вид ткани</div>
+                  <h2>Размер</h2>
+                  <div className={styles.boxOneTypeFilter}>XS</div>
+                  <div className={styles.boxOneTypeFilter}>S</div>
+                  <div className={styles.boxOneTypeFilter}>M</div>
                 </div>
               </div>
               <button

@@ -63,8 +63,8 @@ export default function Home() {
           <div className={styles.boxScroll}>
             {categories
               ?.find((category) => category.trends)
-              ?.products?.map((item) => (
-                <div key={item.id} className={styles.oneThrend}>
+              ?.products?.slice(0,4).map((item) => (
+                <Link href={`products/${item.id}`} key={item.id} className={styles.oneThrend}>
                   <Image
                     src={item.image || ""}
                     alt="oneThrend"
@@ -73,7 +73,7 @@ export default function Home() {
                   />
                   <h2>{item.name}</h2>
                   <p>{Number(item.price).toLocaleString('ru-RU').replace('.00', '')} сум</p>
-                </div>
+                </Link>
               ))}
           </div>
         </div>
