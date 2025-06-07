@@ -56,6 +56,10 @@ export default function Home() {
               </Link>
             )
           )}
+          <Link href="/custom-order/" className={styles.oneCategoryOrder}>
+            <h1>На заказ</h1>
+            <Image src="/customOrder.png" alt="customOrder" width={843} height={750}/>
+          </Link>
         </div>
 
         <div id="thrends" className={styles.boxThrends}>
