@@ -4,4 +4,90 @@
     min-height: calc(100vh - 301px);
     align-items: center;
     gap: 50px;
+    padding: 50px 0px 50px 0px;
+}
+
+.boxOneProduct{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1440px;
+    width: 95%;
+    gap: 30px;
+}
+
+.boxLeft{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    gap: 15px;
+}
+
+.boxRight{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.boxRight img{
+    border-radius: 2px;
+}
+
+.selectProduct{
+    display: flex;
+    flex-direction: column;
+    width: 44px;
+    height: 44px;
+    border-radius: 3px;
+    border: 3px #000 solid;
+}
+
+.boxRowPrice{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.boxRowSelectAll{
+    max-width: 1440px;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selectAll{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.order{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    border-radius: 2px;
+    background-color: #9F938F;
+    width: fit-content;
+}
+
+@media screen and (max-width:1000px) {
+    .boxLeft{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .boxOneProduct{
+        flex-direction: column-reverse;
+    }
+    .boxRight{
+        align-items: center;
+    }
+    .boxLeft{
+        width: 100%;
+    }
 }
