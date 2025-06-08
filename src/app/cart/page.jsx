@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./cart.module.css";
@@ -24,14 +24,21 @@ export default function Cart() {
               <h6>Объем бедер: 90-95</h6>
               <h6>Рост: 160-165</h6>
             </div>
-            <div className={styles.boxRowAddOrRemove}>
-              <button onClick={() => setQuantity(quantity - 1)} disabled={quantity <= 1}>
-                <Image src="/minus.svg" alt="plus" width={24} height={24}/>
-              </button>
-              <h6>{quantity}</h6>
-              <button onClick={() => setQuantity(quantity + 1)} disabled={quantity >= 5}>
-                <Image src="/plus.svg" alt="plus" width={24} height={24}/>
-              </button>
+            <div className={styles.boxRowPrice}>
+              <div className={styles.boxRowAddOrRemove}>
+                <button
+                  onClick={() => setQuantity(quantity - 1)}
+                  disabled={quantity <= 1}>
+                  <Image src="/minus.svg" alt="plus" width={24} height={24} />
+                </button>
+                <h6>{quantity}</h6>
+                <button
+                  onClick={() => setQuantity(quantity + 1)}
+                  disabled={quantity >= 5}>
+                  <Image src="/plus.svg" alt="plus" width={24} height={24} />
+                </button>
+              </div>
+              <button className={styles.boxRemoveFromCart}><h6>Удалить</h6></button>
             </div>
             <div className={styles.boxRowPrice}>
               <p>цена</p>
