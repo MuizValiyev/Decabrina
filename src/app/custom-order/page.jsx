@@ -315,6 +315,7 @@ export default function CustomOrder() {
                 placeholder="максимум 3 символа"
                 inputMode="numeric"
                 pattern="\d*"
+                maxLength={3}
                 value={bust}
                 onChange={(e) => {
                   e.target.value.replace(/\D/g, "");
@@ -332,6 +333,7 @@ export default function CustomOrder() {
                 placeholder="максимум 3 символа"
                 inputMode="numeric"
                 pattern="\d*"
+                maxLength={3}
                 value={waist}
                 onChange={(e) => {
                   e.target.value.replace(/\D/g, "");
@@ -349,6 +351,7 @@ export default function CustomOrder() {
                 placeholder="максимум 3 символа"
                 inputMode="numeric"
                 pattern="\d*"
+                maxLength={3}
                 value={hips}
                 onChange={(e) => {
                   e.target.value.replace(/\D/g, "");
@@ -366,6 +369,7 @@ export default function CustomOrder() {
                 placeholder="максимум 3 символа"
                 inputMode="numeric"
                 pattern="\d*"
+                maxLength={3}
                 value={height}
                 onChange={(e) => {
                   e.target.value.replace(/\D/g, "");

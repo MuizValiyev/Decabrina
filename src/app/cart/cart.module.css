@@ -54,7 +54,7 @@
     width: 95%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
 }
 
@@ -74,6 +74,39 @@
     width: fit-content;
 }
 
+.boxRowAddOrRemove{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #9F938F;
+    width: fit-content;
+    align-items: center;
+    padding: 5px;
+    gap: 5px;
+    border-radius: 2px;
+}
+
+.boxRowAddOrRemove button{
+    display: flex;
+    flex-direction: column;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    background-color: #D9D9D9;
+}
+
+.boxRowAddOrRemove h6{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width:1000px) {
     .boxLeft{
         width: 60%;
@@ -89,5 +122,13 @@
     }
     .boxLeft{
         width: 100%;
+    }
+}
+
+@media screen and (max-width:450px){
+    .order{
+        width: 100%;
+        justify-content: center;
+        align-items: center;
     }
 }
