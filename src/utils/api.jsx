@@ -30,14 +30,14 @@ const useApi = () => {
     withCredentials: true,
     headers: {
       // "Accept-Language": language,
-      "Authorization": token ? `Bearer ${token}` : null,
+      "Authorization": token ? `${token}` : null,
     },
   });
 
   axiosInstance.interceptors.request.use((config) => {
     const token = Cookies.get("access_token");
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+      config.headers["Authorization"] = `${token}`;
     }
     return config;
   });
@@ -64,8 +64,8 @@ const useApi = () => {
 
             // Cookies.set("access_token", newAccessToken);
             Cookies.set("access_token", newAccessToken);
-            axiosInstance.defaults.headers["Authorization"] = `Bearer ${newAccessToken}`;
-            originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+            axiosInstance.defaults.headers["Authorization"] = `${newAccessToken}`;
+            originalRequest.headers["Authorization"] = `${newAccessToken}`;
 
             processQueue(null, newAccessToken);
             isRefreshing = false;
@@ -84,7 +84,7 @@ const useApi = () => {
           failedQueue.push({ resolve, reject });
         })
           .then((newToken) => {
-            originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
+            originalRequest.headers["Authorization"] = `${newToken}`;
             return axiosInstance(originalRequest);
           })
           .catch((err) => Promise.reject(err));

@@ -43,6 +43,10 @@ h1{
 h2{
   font-size: 40px;
 }
+
+h3{
+  font-size: 30px;
+}
 p{
   font-size: 20px;
 }
@@ -53,6 +57,9 @@ p{
   }
   h2{
     font-size: 30px;
+  }
+  h3{
+    font-size: 20px;
   }
   p{
     font-size: 14px;
