@@ -56,7 +56,9 @@ export default function Cart() {
           cartItem.map((item) => (
             <div key={item.id} className={styles.boxOneProduct}>
               <div className={styles.boxLeft}>
+                <Link href={`products/${item.product.id}`}>
                 <h1>{item.product.name}</h1>
+                </Link>
                 <div className={styles.boxColProductSize}>
                   <p>Размер: {item.size.size_label}</p>
                   <h6>Объем груди: {item.size.bust}</h6>
@@ -79,8 +81,7 @@ export default function Cart() {
                     <h6>{item.quantity}</h6>
                     <button
                       onClick={() => handleAddToCart(item)}
-                      disabled={item.quantity >= 5}
-                    >
+                      disabled={item.quantity >= 5}>
                       <Image
                         src="/plus.svg"
                         alt="plus"
@@ -103,14 +104,14 @@ export default function Cart() {
                   </p>
                 </div>
               </div>
-              <div className={styles.boxRight}>
+              <Link href={`products/${item.product.id}`} className={styles.boxRight}>
                 <Image
                   src={item.product.image}
                   alt="Product"
                   width={400}
                   height={556}
                 />
-              </div>
+              </Link>
             </div>
           ))
         )}
