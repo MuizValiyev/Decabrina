@@ -1,4 +1,4 @@
-.mainContainer{
+.mainContainer {
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 301px);
@@ -7,7 +7,7 @@
     gap: 50px;
 }
 
-.boxProductRow{
+.boxProductRow {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -16,7 +16,7 @@
     gap: 30px;
 }
 
-.boxRight{
+.boxRight {
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -29,11 +29,11 @@
     gap: 30px;
 }
 
-.boxLeft img{
+.boxLeft img {
     border-radius: 2px;
 }
 
-.boxRowPrice{
+.boxRowPrice {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -41,10 +41,10 @@
     align-items: center;
 }
 
-.inCart{
+.inCart {
     display: flex;
     flex-direction: column;
-    padding: 10px ;
+    padding: 10px;
     border-radius: 2px;
     background-color: #9F938F;
     width: fit-content;
@@ -53,7 +53,7 @@
     align-items: center;
 }
 
-.boxRowSizes{
+.boxRowSizes {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -61,7 +61,7 @@
 }
 
 
-.boxColSize{
+.boxColSize {
     display: flex;
     flex-direction: row;
     gap: 15px;
@@ -72,7 +72,7 @@
     transition: 0.2s;
 }
 
-.boxColSizeActive{
+.boxColSizeActive {
     display: flex;
     flex-direction: row;
     gap: 15px;
@@ -83,12 +83,13 @@
     transition: 0.2s;
 }
 
-.boxColSize h6, .boxColSizeActive h6{
+.boxColSize h6,
+.boxColSizeActive h6 {
     width: 100px;
     text-align: start;
 }
 
-.boxCol{
+.boxCol {
     display: flex;
     flex-direction: column;
     width: 95%;
@@ -96,7 +97,7 @@
     gap: 20px;
 }
 
-.boxRowAddOrRemove{
+.boxRowAddOrRemove {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -108,7 +109,7 @@
     border-radius: 2px;
 }
 
-.boxRowAddOrRemove button{
+.boxRowAddOrRemove button {
     display: flex;
     flex-direction: column;
     width: 30px;
@@ -119,7 +120,7 @@
     background-color: #D9D9D9;
 }
 
-.boxRowAddOrRemove h6{
+.boxRowAddOrRemove h6 {
     width: 30px;
     height: 30px;
     text-align: center;
@@ -129,17 +130,17 @@
     align-items: center;
 }
 
-.boxRowAddOrGoToCart{
+.boxRowAddOrGoToCart {
     display: flex;
     flex-direction: row;
     gap: 5px;
     align-items: center;
 }
 
-.boxRowAddOrGoToCart a{
+.boxRowAddOrGoToCart a {
     display: flex;
     flex-direction: column;
-    padding:0px 10px;
+    padding: 0px 10px;
     height: 40px;
     border: #9F938F 1px solid;
     justify-content: center;
@@ -147,31 +148,49 @@
     border-radius: 2px;
 }
 
+.boxRow {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    justify-content: space-between;
+}
+
 @media screen and (max-width:950px) {
-    .boxProductRow{
+    .boxProductRow {
         flex-direction: column-reverse;
     }
-    .boxLeft{
-        justify-content:center;
+
+    .boxLeft {
+        justify-content: center;
         align-items: center;
     }
-    .boxRight{
+
+    .boxRight {
         width: 100%;
     }
 }
 
 @media screen and (max-width:650px) {
-    .boxRowSizes{
+    .boxRowSizes {
         overflow-x: auto;
         scrollbar-width: none;
     }
-    .boxColSize, .boxColSizeActive{
+
+    .boxColSize,
+    .boxColSizeActive {
         width: 600px;
     }
 }
 
 @media screen and (max-width:450px) {
-    .boxRowPrice{
+    .boxRowPrice {
+        width: 100%;
+        flex-direction: column;
+        align-items: end;
+        gap: 5px;
+    }
+
+    .boxRow {
         width: 100%;
     }
 }

@@ -130,19 +130,21 @@ export default function Products() {
                 ))}
               </div>
               <div className={styles.boxRowPrice}>
+               <div className={styles.boxRow}>
                 <p>
                   {Number(product.price)
                     .toLocaleString("ru-RU")
                     .replace(".00", "")}{" "}
                   сум
                 </p>
-                <p>{product.in_stock ? "В наличии" : "Нет в наличии"}</p>
+                <p>{product.in_stock ? "В наличии" : "Нет в наличии"}</p> 
+               </div>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={cartItem ? "inCart" : "notInCart"}
-                    initial={{ width: 110, opacity:0 }}
-                    animate={{ width: cartItem ? 'auto' : 110, opacity:1 }}
-                    exit={{ width: 110, opacity:0 }}
+                    initial={{ width: 91, opacity:0 }}
+                    animate={{ width: cartItem ? 'auto' : 91, opacity:1 }}
+                    exit={{ width: 91, opacity:0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     style={{
                       overflow: "hidden",
@@ -150,8 +152,7 @@ export default function Products() {
                       display: "flex",
                       justifyContent: "space-between",
                     }}
-                    className={styles.boxRowAddOrGoToCart}
-                  >
+                    className={styles.boxRowAddOrGoToCart}>
                     {cartItem ? (
                       <>
                         <div className={styles.boxRowAddOrRemove}>
