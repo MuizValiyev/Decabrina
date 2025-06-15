@@ -23,7 +23,7 @@ export default function Cart() {
     data: cartItem,
     isLoading,
     isError,
-    refetch
+    refetch,
   } = useQuery({
     queryKey: ["cartItems"],
     queryFn: fetchCartItems,
@@ -31,19 +31,32 @@ export default function Cart() {
   });
 
   const handleAddToCart = async (item) => {
-    try{
-      const response = await api.post('cart/add/', {
+    try {
+      const response = await api.post("cart/add/", {
         product_id: item.product.id,
         quantity: 1,
         size_id: item.size.id,
         color_id: 0,
         textile_id: 0,
-      })
-      console.log('API Response: ', response.data);
+      });
+      console.log("API Response: ", response.data);
       await refetch();
     } catch (error) {
       console.error(error);
-    };
+    }
+  };
+
+  const handleRemoveFromCart = async (item) => {
+    try {
+      const response = await api.post("cart/update-quantity/", {
+        cart_item_id: item.id,
+        action: "-",
+      });
+      console.log("API Response: ", response.data);
+      await refetch();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -57,7 +70,7 @@ export default function Cart() {
             <div key={item.id} className={styles.boxOneProduct}>
               <div className={styles.boxLeft}>
                 <Link href={`products/${item.product.id}`}>
-                <h1>{item.product.name}</h1>
+                  <h1>{item.product.name}</h1>
                 </Link>
                 <div className={styles.boxColProductSize}>
                   <p>Размер: {item.size.size_label}</p>
@@ -69,11 +82,12 @@ export default function Cart() {
                 <div className={styles.boxRowPrice}>
                   <div className={styles.boxRowAddOrRemove}>
                     <button
-                      onClick={() => setQuantity(item.quantity - 1)}
-                      disabled={item.quantity <= 1}>
+                      onClick={() => handleRemoveFromCart(item)}
+                      disabled={item.quantity <= 1}
+                    >
                       <Image
                         src="/minus.svg"
-                        alt="plus"
+                        alt="minus"
                         width={24}
                         height={24}
                       />
@@ -81,7 +95,8 @@ export default function Cart() {
                     <h6>{item.quantity}</h6>
                     <button
                       onClick={() => handleAddToCart(item)}
-                      disabled={item.quantity >= 5}>
+                      disabled={item.quantity >= 5}
+                    >
                       <Image
                         src="/plus.svg"
                         alt="plus"
@@ -104,7 +119,10 @@ export default function Cart() {
                   </p>
                 </div>
               </div>
-              <Link href={`products/${item.product.id}`} className={styles.boxRight}>
+              <Link
+                href={`products/${item.product.id}`}
+                className={styles.boxRight}
+              >
                 <Image
                   src={item.product.image}
                   alt="Product"

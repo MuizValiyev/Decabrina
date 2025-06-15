@@ -70,8 +70,22 @@ export default function Products() {
   };
 
   const cartItem = cartData?.find(
-    (item) => item.product.id === Number(id) && item.size?.id === size
+    (item) => item.product.id === Number(id) && item.size.id === size
   );
+
+  const handleRemoveFromCart = async () => {
+    try{
+      const response = await api.post('cart/update-quantity/', {
+        cart_item_id: cartItem.id,
+        action:'-',
+      });
+      console.log(response.data);
+      refetchCart();
+    } catch(error) {
+      console.error(error);
+    };
+  };
+
 
   if (!id || !/^\d+$/.test(id)) {
     notFound();
@@ -115,12 +129,9 @@ export default function Products() {
                   <button
                     key={item.id}
                     onClick={() => setSize(item.id)}
-                    className={
-                      size === item.id
+                    className={size === item.id
                         ? styles.boxColSizeActive
-                        : styles.boxColSize
-                    }
-                  >
+                        : styles.boxColSize}>
                     <h6>{item.size_label}</h6>
                     <h6>{item.bust}</h6>
                     <h6>{item.waist}</h6>
@@ -157,9 +168,7 @@ export default function Products() {
                       <>
                         <div className={styles.boxRowAddOrRemove}>
                           <button
-                            onClick={() => setQuantity(cartItem.quantity - 1)}
-                            disabled={cartItem.quantity <= 1}
-                          >
+                            onClick={handleRemoveFromCart}>
                             <Image
                               src="/minus.svg"
                               alt="minus"
@@ -169,9 +178,8 @@ export default function Products() {
                           </button>
                           <h6>{cartItem.quantity}</h6>
                           <button
-                            onClick={() => handleAddToCart(cartItem)}
-                            disabled={cartItem.quantity >= 5}
-                          >
+                            onClick={handleAddToCart}
+                            disabled={cartItem.quantity >= 5}>
                             <Image
                               src="/plus.svg"
                               alt="plus"
