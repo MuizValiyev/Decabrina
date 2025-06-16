@@ -6,6 +6,7 @@ import styles from "./cart.module.css";
 import { useState } from "react";
 import useApi from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
+import { motion, AnimatePresence } from "motion/react";
 
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
@@ -59,6 +60,16 @@ export default function Cart() {
     }
   };
 
+  const handleDeleteFromCart = async (item) => {
+    try {
+      const response = await api.delete(`cart/cart/delete/${item.id}/`);
+      console.log("API Response delete item: ", response.data);
+      await refetch();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Nav />
@@ -66,8 +77,15 @@ export default function Cart() {
         {isLoading ? (
           <>Загрузка</>
         ) : (
-          cartItem.map((item) => (
-            <div key={item.id} className={styles.boxOneProduct}>
+          <AnimatePresence mode="wait">
+            {cartItem.map((item) => (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.1 }}
+              key={item.id}
+              className={styles.boxOneProduct}>
               <div className={styles.boxLeft}>
                 <Link href={`products/${item.product.id}`}>
                   <h1>{item.product.name}</h1>
@@ -105,7 +123,10 @@ export default function Cart() {
                       />
                     </button>
                   </div>
-                  <button className={styles.boxRemoveFromCart}>
+                  <button
+                    onClick={() => handleDeleteFromCart(item)}
+                    className={styles.boxRemoveFromCart}
+                  >
                     <h6>Удалить</h6>
                   </button>
                 </div>
@@ -130,8 +151,9 @@ export default function Cart() {
                   height={556}
                 />
               </Link>
-            </div>
-          ))
+            </motion.div>
+            ))}
+          </AnimatePresence>
         )}
         <div className={styles.boxRowSelectAll}>
           <Link href="/order" className={styles.order}>
