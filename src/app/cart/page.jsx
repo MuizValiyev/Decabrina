@@ -7,12 +7,15 @@ import { useState } from "react";
 import useApi from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "motion/react";
+import OrderModal from "@/components/orderModel";
 
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
 export default function Cart() {
   const api = useApi();
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   const fetchCartItems = async () => {
     const response = await api.get("cart/");
@@ -101,8 +104,7 @@ export default function Cart() {
                   <div className={styles.boxRowAddOrRemove}>
                     <button
                       onClick={() => handleRemoveFromCart(item)}
-                      disabled={item.quantity <= 1}
-                    >
+                      disabled={item.quantity <= 1}>
                       <Image
                         src="/minus.svg"
                         alt="minus"
@@ -156,12 +158,13 @@ export default function Cart() {
           </AnimatePresence>
         )}
         <div className={styles.boxRowSelectAll}>
-          <Link href="/order" className={styles.order}>
+          <button onClick={() => setModalOpen(true)} disabled={!cartItem || cartItem.length === 0} className={styles.order}>
             Оформить заказ
-          </Link>
+          </button>
         </div>
       </div>
       <Footer />
+      <OrderModal isOpen={modalOpen} onClose={() => setModalOpen(false)} refetch={refetch}/>
     </>
   );
 }

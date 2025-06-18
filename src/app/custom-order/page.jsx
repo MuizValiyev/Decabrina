@@ -25,6 +25,8 @@ export default function CustomOrder() {
   const [hips, setHips] = useState("");
   const [height, setHeight] = useState("");
   const [comment, setComment] = useState("");
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
   // ------------------------------ POST Request Data end ------------------------------
 
   const [modelName, setmodelName] = useState("");
@@ -66,10 +68,12 @@ export default function CustomOrder() {
     setSizeName("");
     setColorName("");
     setTextileName("");
+    setCity("");
+    setAddress("");
   };
   // ------------------------------ APIs GET ------------------------------
   const fetchColors = async () => {
-    const response = await api.get("api/custom-orders/colors/");
+    const response = await api.get("custom-orders/colors/");
     return response.data;
   };
   const { data: colorsData } = useQuery({
@@ -79,7 +83,7 @@ export default function CustomOrder() {
   });
 
   const fetchModel = async () => {
-    const response = await api.get("api/custom-orders/models/");
+    const response = await api.get("custom-orders/models/");
     return response.data;
   };
   const { data: modelsData } = useQuery({
@@ -89,7 +93,7 @@ export default function CustomOrder() {
   });
 
   const fetchTextile = async () => {
-    const response = await api.get("api/custom-orders/textile/");
+    const response = await api.get("custom-orders/textile/");
     return response.data;
   };
   const { data: textileData } = useQuery({
@@ -99,7 +103,7 @@ export default function CustomOrder() {
   });
 
   const fetchSize = async () => {
-    const response = await api.get("api/custom-orders/sizes/");
+    const response = await api.get("custom-orders/sizes/");
     return response.data;
   };
   const { data: sizeData } = useQuery({
@@ -111,7 +115,7 @@ export default function CustomOrder() {
   // ------------------------------ API POST ------------------------------
   const createCustomOrder = async () => {
     try {
-      const response = await api.post("api/custom-orders/orders/create/", {
+      const response = await api.post("custom-orders/orders/create/", {
         phone: phone,
         model: model,
         textile: textile,
@@ -122,6 +126,8 @@ export default function CustomOrder() {
         hips: hips,
         height: height,
         comment: comment,
+        city: city,
+        address: address,
       });
       console.log(response.data);
       setSuccsess("Заказ успешно оформлен!");
@@ -380,6 +386,26 @@ export default function CustomOrder() {
             </div>
           </div>
           <div className={styles.boxOneCustom}>
+            <p>Город</p>
+            <div className={styles.boxinput}>
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className={styles.boxOneCustom}>
+            <p>Адрес</p>
+            <div className={styles.boxinput}>
+              <input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className={styles.boxOneCustom}>
             <p>Коментарий</p>
             <div className={styles.boxinput}>
               <input
@@ -391,9 +417,15 @@ export default function CustomOrder() {
           </div>
           <AnimatePresence>
             {error || succsess ? (
-            <motion.div initial={{height:0, opacity:0}} animate={{height:'auto', opacity:1}} exit={{height:0, opacity:0}} transition={{duration:0.1}} className={styles.errorOrSuccsess}>
-              <h6>{error || succsess}</h6>
-            </motion.div>
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.1 }}
+                className={styles.errorOrSuccsess}
+              >
+                <h6>{error || succsess}</h6>
+              </motion.div>
             ) : null}
           </AnimatePresence>
           <button

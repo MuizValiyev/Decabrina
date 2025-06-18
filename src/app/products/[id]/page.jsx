@@ -86,6 +86,16 @@ export default function Products() {
     };
   };
 
+  const handleDeleteItem = async (cartItem) => {
+    try{
+      const response = await api.delete(`cart/cart/delete/${cartItem.id}/`);
+      console.log(response.data);
+      await refetchCart();
+    }catch(error) {
+      console.error(error);
+    };
+  };
+
 
   if (!id || !/^\d+$/.test(id)) {
     notFound();
@@ -166,9 +176,10 @@ export default function Products() {
                     className={styles.boxRowAddOrGoToCart}>
                     {cartItem ? (
                       <>
+                      <button onClick={() => handleDeleteItem(cartItem)} className={styles.deleteProd}>Удалить</button>
                         <div className={styles.boxRowAddOrRemove}>
                           <button
-                            onClick={handleRemoveFromCart}>
+                            onClick={handleRemoveFromCart} disabled={cartItem.quantity <= 1}>
                             <Image
                               src="/minus.svg"
                               alt="minus"

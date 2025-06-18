@@ -1,0 +1,63 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+    pointer-events: auto;
+}
+
+
+.mainModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background-color: #9F938F;
+    border-radius: 2px;
+    gap: 10px;
+    width: 95%;
+    max-width: 650px;
+}
+
+.boxInputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.boxInputs h6{
+    margin-top: 5px;
+}
+
+.mainModal h2 {
+    text-align: center;
+}
+
+.mainModal h6{
+    width: 100%;
+}
+
+.mainModal input, .mainModal button{
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+    width: 100%;
+    background-color: #cac1c0;
+    border-radius: 2px;
+    outline: none;
+}
+
+.mainModal button{
+    margin-top: 10px;
+}
