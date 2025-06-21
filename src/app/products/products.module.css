@@ -47,7 +47,7 @@
 .boxCatalog{
     width: 100%;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
 }
 
@@ -128,7 +128,7 @@
 
 @media screen and (max-width:1100px) {
     .boxCatalog{
-        grid-template-columns: auto auto;
+        grid-template-columns: 1fr 1fr;
     }
     .boxOneProduct{
         max-width: 100%;
