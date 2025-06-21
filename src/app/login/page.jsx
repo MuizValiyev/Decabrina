@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./login.module.css";
 import { useState } from "react";
 
@@ -149,6 +150,7 @@ export default function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <Link href={'login/password-reset/'}>Забыли пароль?</Link>
               </div>
               <div className={styles.boxButtons}>
                 <button onClick={() => setLogin(null)}>Назад</button>

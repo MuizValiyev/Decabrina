@@ -41,6 +41,13 @@
     gap: 10px;
 }
 
+.boxOneInput a{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+}
+
 .boxForm button{
     max-width: 162px;
     max-height: 44px;
