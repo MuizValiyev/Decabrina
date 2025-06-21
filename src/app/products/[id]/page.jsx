@@ -10,11 +10,13 @@ import useApi from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useLanguage } from "@/context/languageContext";
 
 export default function Products() {
   const params = useParams();
   const { id } = params;
   const api = useApi();
+  const {translate, language} = useLanguage("");
 
   const [size, setSize] = useState(0);
 
@@ -28,7 +30,7 @@ export default function Products() {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["oneProduct", id],
+    queryKey: ["oneProduct", id, language],
     queryFn: fetchOneProduct,
     enabled: Boolean(id),
   });
@@ -45,7 +47,7 @@ export default function Products() {
     isError: isCartError,
     refetch: refetchCart,
   } = useQuery({
-    queryKey: ["cart"],
+    queryKey: ["cart", language],
     queryFn: fetchCartItems,
     enabled: true,
   });
@@ -107,13 +109,13 @@ export default function Products() {
       <Nav />
       <div className={styles.mainContainer}>
         {isLoading ? (
-          <>Загрузка</>
+          <>{translate("Загрузка")}</>
         ) : (
           <>
             <div className={styles.boxProductRow}>
               <div className={styles.boxRight}>
                 <h1>{product.name}</h1>
-                <h2>Описание:</h2>
+                <h2>{translate("Описание:")}</h2>
                 <p>{product.description}</p>
               </div>
               <div className={styles.boxLeft}>
@@ -129,11 +131,11 @@ export default function Products() {
             <div className={styles.boxCol}>
               <div className={styles.boxRowSizes}>
                 <div className={styles.boxColSize}>
-                  <h6>Мерки</h6>
-                  <h6>Объем груди</h6>
-                  <h6>Объем талии</h6>
-                  <h6>Объем бедер</h6>
-                  <h6>Рост</h6>
+                  <h6>{translate("Мерки")}</h6>
+                  <h6>{translate("Объем груди")}</h6>
+                  <h6>{translate("Объем талии")}</h6>
+                  <h6>{translate("Объем бедер")}</h6>
+                  <h6>{translate("Рост")}</h6>
                 </div>
                 {product.sizes.map((item) => (
                   <button
@@ -156,27 +158,27 @@ export default function Products() {
                   {Number(product.price)
                     .toLocaleString("ru-RU")
                     .replace(".00", "")}{" "}
-                  сум
+                  {translate("сум")}
                 </p>
-                <p>{product.in_stock ? "В наличии" : "Нет в наличии"}</p> 
+                <p>{product.in_stock ? translate("В наличии") : translate("Нет в наличии")}</p> 
                </div>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={cartItem ? "inCart" : "notInCart"}
-                    initial={{ width: 91, opacity:0 }}
-                    animate={{ width: cartItem ? 'auto' : 91, opacity:1 }}
-                    exit={{ width: 91, opacity:0 }}
+                    initial={{ width: 150, opacity:0 }}
+                    animate={{ width: cartItem ? 'auto' : 150, opacity:1 }}
+                    exit={{ width: 150, opacity:0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     style={{
                       overflow: "hidden",
                       transformOrigin: "right",
                       display: "flex",
-                      justifyContent: "space-between",
+                      justifyContent: "end",
                     }}
                     className={styles.boxRowAddOrGoToCart}>
                     {cartItem ? (
                       <>
-                      <button onClick={() => handleDeleteItem(cartItem)} className={styles.deleteProd}>Удалить</button>
+                      <button onClick={() => handleDeleteItem(cartItem)} className={styles.deleteProd}>{translate("Удалить")}</button>
                         <div className={styles.boxRowAddOrRemove}>
                           <button
                             onClick={handleRemoveFromCart} disabled={cartItem.quantity <= 1}>
@@ -199,7 +201,7 @@ export default function Products() {
                             />
                           </button>
                         </div>
-                        <Link href="/cart/">Перейти</Link>
+                        <Link href="/cart/"><h6>{translate("Перейти")}</h6></Link>
                       </>
                     ) : (
                       <button
@@ -207,7 +209,7 @@ export default function Products() {
                         className={styles.inCart}
                         disabled={size === 0 || !product.in_stock}
                       >
-                        В корзину
+                        {translate("В корзину")}
                       </button>
                     )}
                   </motion.div>

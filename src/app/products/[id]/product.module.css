@@ -139,13 +139,22 @@
 
 .boxRowAddOrGoToCart a {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 0px 10px;
     height: 40px;
     border: #9F938F 1px solid;
     justify-content: center;
     align-items: center;
     border-radius: 2px;
+    width: 81px;
+}
+
+.boxRowAddOrGoToCart a h6 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
 }
 
 .boxRow {
@@ -155,7 +164,7 @@
     justify-content: space-between;
 }
 
-.deleteProd{
+.deleteProd {
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -186,6 +195,7 @@
     .boxColSizeActive {
         width: 600px;
     }
+
     .boxRowPrice {
         width: 100%;
         flex-direction: column;

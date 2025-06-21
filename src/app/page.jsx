@@ -8,8 +8,10 @@ import Footer from "@/components/footer";
 
 import useApi from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
+import { useLanguage } from "@/context/languageContext";
 
 export default function Home() {
+  const {translate, language} = useLanguage();
   const api = useApi();
 
   const fetchCategories = async () => {
@@ -23,7 +25,7 @@ export default function Home() {
     isLoading: isLoading,
     isError: isError,
   } = useQuery({
-    queryKey: ["categories"],
+    queryKey: ["categories", language],
     queryFn: fetchCategories,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
@@ -57,13 +59,13 @@ export default function Home() {
             )
           )}
           <Link href="/custom-order/" className={styles.oneCategoryOrder}>
-            <h1>На заказ</h1>
+            <h1>{translate("На заказ")}</h1>
             <Image src="/customOrder.png" alt="customOrder" width={843} height={750}/>
           </Link>
         </div>
 
         <div id="thrends" className={styles.boxThrends}>
-          <h1>Тренды</h1>
+          <h1>{translate("Тренды")}</h1>
           <div className={styles.boxScroll}>
             {categories
               ?.find((category) => category.trends)
@@ -76,22 +78,18 @@ export default function Home() {
                     height={440}
                   />
                   <h2>{item.name}</h2>
-                  <p>{Number(item.price).toLocaleString('ru-RU').replace('.00', '')} сум</p>
+                  <p>{Number(item.price).toLocaleString('ru-RU').replace('.00', '')} {translate("сум")}</p>
                 </Link>
               ))}
           </div>
         </div>
 
         <div className={styles.boxInfo}>
-          <h1>DECABRINA - это исключительно авторские работы.</h1>
+          <h1>{translate('DECABRINA - это исключительно авторские работы.')}</h1>
           <p>
-            Мы разрабатываем модели с учетом комфорта, красоты и лаконичности,
-            так, что бы каждая смогла найти у нас что то свое. В нашем
-            интернет-магазине вы сможете оформить заказ всего за несколько
-            минут, оплатить его удобным способом и заказать доставку в любой
-            город или страну.
+            {translate("Мы разрабатываем модели с учетом комфорта")}
           </p>
-          <p>Наслаждайтесь покупками, не выходя из дома!</p>
+          <p>{translate("Наслаждайтесь покупками, не выходя из дома!")}</p>
         </div>
       </div>
       <Footer />

@@ -6,9 +6,11 @@ import { useState } from "react";
 
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import { useLanguage } from "@/context/languageContext";
 
 export default function PasswordReset() {
   const api = useApi();
+  const {translate, language} = useLanguage();
 
   const [email, setEmail] = useState("");
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -68,61 +70,61 @@ export default function PasswordReset() {
       <div className={styles.mainContainer}>
         {passwordReset == null && (
           <>
-            <h1>Сброс пароля</h1>
+            <h1>{translate("Сброс пароля")}</h1>
             <div className={styles.boxForm}>
               <div className={styles.boxOneInput}>
                 <h6>E-mail</h6>
                 <input
                   type="email"
                   name="email"
-                  placeholder="Введите e-mail"
+                  placeholder={translate("Введите e-mail")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <button onClick={handlePasswordReset} disabled={!isValidEmail}>
-                Далее
+                {translate("Далее")}
               </button>
             </div>
           </>
         )}
         {passwordReset === false && (
           <>
-            <h1>Сброс пароля</h1>
+            <h1>{translate("Сброс пароля")}</h1>
             <div className={styles.boxForm}>
               <div className={styles.boxOneInput}>
-                <h6>Код подтверждение</h6>
+                <h6>{translate("Код подтверждение")}</h6>
                 <input
                   type="text"
                   name="text"
-                  placeholder="Введите код из письма"
+                  placeholder={translate("Введите код из письма")}
                   maxLength={6}
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
                 />
               </div>
               <button onClick={handleVerificationEmail} disabled={!isValidCode}>
-                Далее
+                {translate("Далее")}
               </button>
             </div>
           </>
         )}
         {passwordReset === true && (
           <>
-            <h1>Сброс пароля</h1>
+            <h1>{translate("Сброс пароля")}</h1>
             <div className={styles.boxForm}>
               <div className={styles.boxOneInput}>
-                <h6>Новый пароль</h6>
+                <h6>{translate("Новый пароль")}</h6>
                 <input
                   type="text"
                   name="text"
-                  placeholder="Введите новый пароль"
+                  placeholder={translate("Введите новый пароль")}
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
               </div>
               <button onClick={handleNewPassword} disabled={!isValidPassword}>
-                Далее
+                {translate("Далее")}
               </button>
             </div>
           </>

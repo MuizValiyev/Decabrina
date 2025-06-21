@@ -39,8 +39,7 @@ export default function Nav() {
           <div className={styles.boxLogo}>
             <button
               onClick={() => setModal(!modal)}
-              className={styles.burgerMenu}
-            >
+              className={styles.burgerMenu}>
               <Image
                 src="/burger.svg"
                 alt="burger menu"
@@ -67,10 +66,10 @@ export default function Nav() {
             {translate("продукция")}
           </Link>
           <Link href="/about" className={styles.oneLinkNav}>
-            о предприятии
+            {translate("о предприятии")}
           </Link>
           <Link href="/delivery" className={styles.oneLinkNav}>
-            доставка
+            {translate("доставка")}
           </Link>
           <div className={styles.boxSearch}>
             <LanguageSwitcher />
@@ -97,9 +96,9 @@ export default function Nav() {
             transition={{ duration: 0.1 }}
             className={styles.modal}
           >
-            <Link href="/products">продукция</Link>
-            <Link href="/about">о предприятии</Link>
-            <Link href="/delivery">доставка</Link>
+            <Link href="/products">{translate("продукция")}</Link>
+            <Link href="/about">{translate("о предприятии")}</Link>
+            <Link href="/delivery">{translate("доставка")}</Link>
             <div className={styles.boxRowLanguage}>
               <button onClick={() => changeLanguage("ru")} className={styles.oneLanguage}>RU</button>
               <button onClick={() => changeLanguage("uz")} className={styles.oneLanguage}>UZ</button>

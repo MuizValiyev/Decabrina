@@ -9,9 +9,11 @@ import useApi from "@/utils/api";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import Cookies from "js-cookie";
+import { useLanguage } from "@/context/languageContext";
 
 export default function Login() {
   const api = useApi();
+  const {translate, language} = useLanguage();
 
   const [login, setLogin] = useState(null);
 
@@ -79,60 +81,60 @@ export default function Login() {
       <div className={styles.mainContainer}>
         {login === null && (
           <>
-            <h1>Вход или регистрация</h1>
+            <h1>{translate("Вход или регистрация")}</h1>
             <div className={styles.boxForm}>
               <div className={styles.boxOneInput}>
                 <h6>E-mail</h6>
                 <input
                   type="email" name="email"
-                  placeholder="Введите e-mail"
+                  placeholder={translate("Введите e-mail")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <button onClick={handleCheckEmail} disabled={!isValidEmail}>
-                Далее
+                {translate("Далее")}
               </button>
             </div>
           </>
         )}
         {login === false && (
           <>
-            <h1>Регистрация</h1>
+            <h1>{translate("Регистрация")}</h1>
             <div className={styles.boxForm}>
               <div className={styles.boxOneInput}>
-                <h6>Имя</h6>
+                <h6>{translate("Имя")}</h6>
                 <input
                   type="name"
                   name="name"
-                  placeholder="Введите имя"
+                  placeholder={translate("Введите имя")}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
               <div className={styles.boxOneInput}>
-                <h6>Фамилия</h6>
+                <h6>{translate("Фамилия")}</h6>
                 <input
                   type="text"
                   name="lastName"
-                  placeholder="Введите фамилию"
+                  placeholder={translate("Введите фамилию")}
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
               <div className={styles.boxOneInput}>
-                <h6>Пароль</h6>
+                <h6>{translate("Пароль")}</h6>
                 <input
                   type="text"
-                  placeholder="Придумайте пароль"
+                  placeholder={translate("Придумайте пароль")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div className={styles.boxButtons}>
-                <button onClick={() => setLogin(null)}>Назад</button>
+                <button onClick={() => setLogin(null)}>{translate("Назад")}</button>
                 <button onClick={handleRegistred} disabled={!isValidName}>
-                  Далее
+                  {translate("Далее")}
                 </button>
               </div>
             </div>
@@ -140,22 +142,22 @@ export default function Login() {
         )}
         {login === true && (
           <>
-            <h1>Вход</h1>
+            <h1>{translate("Вход")}</h1>
             <div className={styles.boxForm}>
               <div className={styles.boxOneInput}>
-                <h6>Пароль</h6>
+                <h6>{translate("Пароль")}</h6>
                 <input
                   type="text"
-                  placeholder="Введите пароль"
+                  placeholder={translate("Введите пароль")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <Link href={'login/password-reset/'}>Забыли пароль?</Link>
+                <Link href={'login/password-reset/'}>{translate("Забыли пароль?")}</Link>
               </div>
               <div className={styles.boxButtons}>
-                <button onClick={() => setLogin(null)}>Назад</button>
+                <button onClick={() => setLogin(null)}>{translate("Назад")}</button>
                 <button onClick={handleLogin} disabled={!isValidPassword}>
-                  Войти
+                  {translate("Войти")}
                 </button>
               </div>
             </div>

@@ -7,12 +7,15 @@ import useApi from "@/utils/api";
 import { useState, useEffect, Suspense } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "motion/react";
+import { useLanguage } from "@/context/languageContext";
 
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
+
 export default function CustomOrder() {
   const api = useApi();
+  const {translate, language} = useLanguage();
 
   // ------------------------------ POST Request Data ------------------------------
   const [model, setModel] = useState();
@@ -77,7 +80,7 @@ export default function CustomOrder() {
     return response.data;
   };
   const { data: colorsData } = useQuery({
-    queryKey: ["colors"],
+    queryKey: ["colors", language],
     queryFn: fetchColors,
     enabled: true,
   });
@@ -87,7 +90,7 @@ export default function CustomOrder() {
     return response.data;
   };
   const { data: modelsData } = useQuery({
-    queryKey: ["models"],
+    queryKey: ["models", language],
     queryFn: fetchModel,
     enabled: true,
   });
@@ -97,7 +100,7 @@ export default function CustomOrder() {
     return response.data;
   };
   const { data: textileData } = useQuery({
-    queryKey: ["textile"],
+    queryKey: ["textile", language],
     queryFn: fetchTextile,
     enabled: true,
   });
@@ -107,7 +110,7 @@ export default function CustomOrder() {
     return response.data;
   };
   const { data: sizeData } = useQuery({
-    queryKey: ["size"],
+    queryKey: ["size", language],
     queryFn: fetchSize,
     enabled: true,
   });
@@ -143,10 +146,10 @@ export default function CustomOrder() {
     <>
       <Nav />
       <div className={styles.mainContainer}>
-        <h1>Пошив на заказ</h1>
+        <h1>{translate("Пошив на заказ")}</h1>
         <div className={styles.boxCustomOrder}>
           <div className={styles.boxOneCustom}>
-            <p>Номер для связи</p>
+            <p>{translate("Номер для связи")}</p>
             <input
               type="text"
               inputMode="numeric"
@@ -160,7 +163,7 @@ export default function CustomOrder() {
             />
           </div>
           <div className={styles.boxOneCustom}>
-            <p>Модель</p>
+            <p>{translate("Модель")}</p>
             <button
               onClick={() => setPopup(popup === 1 ? 0 : 1)}
               className={styles.boxOneCustomButton}
@@ -198,7 +201,7 @@ export default function CustomOrder() {
             </AnimatePresence>
           </div>
           <div className={styles.boxOneCustom}>
-            <p>Цвет</p>
+            <p>{translate("Цвет")}</p>
             <button
               onClick={() => setPopup(popup === 2 ? 0 : 2)}
               className={styles.boxOneCustomButton}
@@ -236,7 +239,7 @@ export default function CustomOrder() {
             </AnimatePresence>
           </div>
           <div className={styles.boxOneCustom}>
-            <p>Ткань</p>
+            <p>{translate("Ткань")}</p>
             <button
               onClick={() => setPopup(popup === 3 ? 0 : 3)}
               className={styles.boxOneCustomButton}
@@ -276,7 +279,7 @@ export default function CustomOrder() {
             </AnimatePresence>
           </div>
           <div className={styles.boxOneCustom}>
-            <p>Размер</p>
+            <p>{translate("Размер")}</p>
             <button
               onClick={() => setPopup(popup === 4 ? 0 : 4)}
               className={styles.boxOneCustomButton}
@@ -314,11 +317,11 @@ export default function CustomOrder() {
             </AnimatePresence>
           </div>
           <div className={styles.boxOneCustom}>
-            <p>Обхват груди</p>
+            <p>{translate("Обхват груди")}</p>
             <div className={styles.boxinput}>
               <input
                 type="text"
-                placeholder="максимум 3 символа"
+                placeholder={translate("максимум 3 символа")}
                 inputMode="numeric"
                 pattern="\d*"
                 maxLength={3}
@@ -332,11 +335,11 @@ export default function CustomOrder() {
             </div>
           </div>
           <div className={styles.boxOneCustom}>
-            <p>Обхват талии</p>
+            <p>{translate("Обхват талии")}</p>
             <div className={styles.boxinput}>
               <input
                 type="text"
-                placeholder="максимум 3 символа"
+                placeholder={translate("максимум 3 символа")}
                 inputMode="numeric"
                 pattern="\d*"
                 maxLength={3}
@@ -350,11 +353,11 @@ export default function CustomOrder() {
             </div>
           </div>
           <div className={styles.boxOneCustom}>
-            <p>Обхват бедер</p>
+            <p>{translate("Обхват бедер")}</p>
             <div className={styles.boxinput}>
               <input
                 type="text"
-                placeholder="максимум 3 символа"
+                placeholder={translate("максимум 3 символа")}
                 inputMode="numeric"
                 pattern="\d*"
                 maxLength={3}
@@ -368,11 +371,11 @@ export default function CustomOrder() {
             </div>
           </div>
           <div className={styles.boxOneCustom}>
-            <p>Рост</p>
+            <p>{translate("Рост")}</p>
             <div className={styles.boxinput}>
               <input
                 type="text"
-                placeholder="максимум 3 символа"
+                placeholder={translate("максимум 3 символа")}
                 inputMode="numeric"
                 pattern="\d*"
                 maxLength={3}
@@ -386,7 +389,7 @@ export default function CustomOrder() {
             </div>
           </div>
           <div className={styles.boxOneCustom}>
-            <p>Город</p>
+            <p>{translate("Город")}</p>
             <div className={styles.boxinput}>
               <input
                 type="text"
@@ -396,7 +399,7 @@ export default function CustomOrder() {
             </div>
           </div>
           <div className={styles.boxOneCustom}>
-            <p>Адрес</p>
+            <p>{translate("Адрес")}</p>
             <div className={styles.boxinput}>
               <input
                 type="text"
@@ -406,7 +409,7 @@ export default function CustomOrder() {
             </div>
           </div>
           <div className={styles.boxOneCustom}>
-            <p>Коментарий</p>
+            <p>{translate("Коментарий")}</p>
             <div className={styles.boxinput}>
               <input
                 type="text"
@@ -433,7 +436,7 @@ export default function CustomOrder() {
             disabled={!isValid}
             className={styles.order}
           >
-            Оформить заказ
+            {translate("Оформить заказ")}
           </button>
         </div>
       </div>

@@ -8,12 +8,14 @@ import useApi from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "motion/react";
 import OrderModal from "@/components/orderModel";
+import { useLanguage } from "@/context/languageContext";
 
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
 export default function Cart() {
   const api = useApi();
+  const {translate, language} = useLanguage();
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -29,7 +31,7 @@ export default function Cart() {
     isError,
     refetch,
   } = useQuery({
-    queryKey: ["cartItems"],
+    queryKey: ["cartItems", language],
     queryFn: fetchCartItems,
     enabled: true,
   });
@@ -78,7 +80,7 @@ export default function Cart() {
       <Nav />
       <div className={styles.mainContainer}>
         {isLoading ? (
-          <>Загрузка</>
+          <>{translate("Загрузка")}</>
         ) : (
           <AnimatePresence mode="wait">
             {cartItem.map((item) => (
@@ -94,11 +96,11 @@ export default function Cart() {
                   <h1>{item.product.name}</h1>
                 </Link>
                 <div className={styles.boxColProductSize}>
-                  <p>Размер: {item.size.size_label}</p>
-                  <h6>Объем груди: {item.size.bust}</h6>
-                  <h6>Объем талии: {item.size.waist}</h6>
-                  <h6>Объем бедер: {item.size.hips}</h6>
-                  <h6>Рост: {item.size.height}</h6>
+                  <p>{translate("Размер")}: {item.size.size_label}</p>
+                  <h6>{translate("Объем груди")}: {item.size.bust}</h6>
+                  <h6>{translate("Объем талии")}: {item.size.waist}</h6>
+                  <h6>{translate("Объем бедер")}: {item.size.hips}</h6>
+                  <h6>{translate("Рост")}: {item.size.height}</h6>
                 </div>
                 <div className={styles.boxRowPrice}>
                   <div className={styles.boxRowAddOrRemove}>
@@ -129,16 +131,16 @@ export default function Cart() {
                     onClick={() => handleDeleteFromCart(item)}
                     className={styles.boxRemoveFromCart}
                   >
-                    <h6>Удалить</h6>
+                    <h6>{translate("Удалить")}</h6>
                   </button>
                 </div>
                 <div className={styles.boxRowPrice}>
-                  <p>цена</p>
+                  <p>{translate("цена")}</p>
                   <p>
                     {Number(item.product.price)
                       .toLocaleString("ru-RU")
                       .replace(".00", "")}{" "}
-                    сум
+                    {translate("сум")}
                   </p>
                 </div>
               </div>
@@ -159,7 +161,7 @@ export default function Cart() {
         )}
         <div className={styles.boxRowSelectAll}>
           <button onClick={() => setModalOpen(true)} disabled={!cartItem || cartItem.length === 0} className={styles.order}>
-            Оформить заказ
+            {translate("Оформить заказ")}
           </button>
         </div>
       </div>

@@ -6,12 +6,14 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import useApi from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
+import { useLanguage } from "@/context/languageContext";
 
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
 export default function Products() {
   const api = useApi();
+  const {translate, language} = useLanguage("");
 
   const fetchProducts = async () => {
     const response = await api.get('products/products/');
@@ -24,7 +26,7 @@ export default function Products() {
     isLoading: isLoading,
     isError: isError,
   } = useQuery({
-    queryKey: ["productsData"],
+    queryKey: ["productsData", language],
     queryFn: fetchProducts,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
@@ -58,15 +60,13 @@ export default function Products() {
                 height={350}
               />
               <h2>{item.name}</h2>
-              <p>{Number(item.price).toLocaleString('ru-RU').replace('.00', "")} сум</p>
+              <p>{Number(item.price).toLocaleString('ru-RU').replace('.00', "")} {translate("сум")}</p>
             </Link>
             ))
             ) : (<></>)}
           </div>
         </div>
       </div>
-      <AnimatePresence>
-      </AnimatePresence>
       <Footer />
     </>
   );

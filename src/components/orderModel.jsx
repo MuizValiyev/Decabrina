@@ -4,9 +4,11 @@ import styles from "./orderModel.module.css";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useApi from "@/utils/api";
+import { useLanguage } from "@/context/languageContext";
 
 export default function ({ isOpen, onClose, refetch }) {
   const api = useApi();
+  const {translate} = useLanguage();
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
@@ -48,29 +50,29 @@ export default function ({ isOpen, onClose, refetch }) {
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.mainModal} onClick={(e) => e.stopPropagation()}>
-        <h2>Оформление заказа</h2>
+        <h2>{translate("Оформление заказа")}</h2>
         <div className={styles.boxInputs}>
-          <h6>Номер для связи</h6>
+          <h6>{translate("Номер для связи")}</h6>
           <input
             type="text"
             value={phone}
             maxLength={13}
             onChange={(e) => setPhone(e.target.value)}
           />
-          <h6>Город</h6>
+          <h6>{translate("Город")}</h6>
           <input
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
-          <h6>Адрес</h6>
+          <h6>{translate("Адрес")}</h6>
           <input
             type="text"
             value={address}
             onChange={(e) => setAdderss(e.target.value)}
           />
         </div>
-        <button onClick={handleOrder}>Оформить заказ</button>
+        <button onClick={handleOrder}>{translate("Оформить заказ")}</button>
       </div>
     </div>
   );
