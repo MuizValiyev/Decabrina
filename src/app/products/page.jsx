@@ -47,21 +47,6 @@ export default function Products() {
       <Nav />
       <div className={styles.mainContainer}>
         <div className={styles.boxFilterAndCatalog}>
-          <div className={styles.filter}>
-            <h1>Фильтр</h1>
-            <div className={styles.boxFilter}>
-              <h2>Размер</h2>
-              <div className={styles.boxOneTypeFilter}>XS</div>
-              <div className={styles.boxOneTypeFilter}>S</div>
-              <div className={styles.boxOneTypeFilter}>M</div>
-            </div>
-          </div>
-          <button
-            onClick={() => setFilterModal(!filterModal)}
-            className={styles.openFilter}
-          >
-            Фильтр
-          </button>
           <div className={styles.boxCatalog}>
             {products?.length > 0 ? (
             products.map((item) => (
@@ -81,37 +66,6 @@ export default function Products() {
         </div>
       </div>
       <AnimatePresence>
-        {filterModal && (
-          <>
-            <motion.div
-              initial={{ y: -20, opacity: 0, display: "none" }}
-              animate={{ y: 0, opacity: 1, display: "flex" }}
-              exit={{ y: -20, opacity: 0, display: "none" }}
-              transition={{ duration: 0.1 }}
-              className={styles.mainFilterAdaptive}>
-              <div className={styles.filterAdaptiveRow}>
-                <div className={styles.boxFilterAdaptive2}>
-                <h1>Фильтр</h1>
-                <div className={styles.boxFilter}>
-                  <h2>Размер</h2>
-                  <div className={styles.boxOneTypeFilter}>XS</div>
-                  <div className={styles.boxOneTypeFilter}>S</div>
-                  <div className={styles.boxOneTypeFilter}>M</div>
-                </div>
-              </div>
-              <button
-                onClick={() => setFilterModal(false)}
-                className={styles.closeFilter}
-              >
-                <Image src="/close.svg" alt="close" width={40} height={40} />
-              </button>
-              </div>
-              <button className={styles.filterApply} onClick={() => setFilterModal(false)}>
-                применить фильтр
-              </button>
-            </motion.div>
-          </>
-        )}
       </AnimatePresence>
       <Footer />
     </>

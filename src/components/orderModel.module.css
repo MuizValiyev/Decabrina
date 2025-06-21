@@ -51,7 +51,7 @@
 .mainModal input, .mainModal button{
     display: flex;
     flex-direction: column;
-    padding: 5px 10px;
+    padding: 10px 20px;
     width: 100%;
     background-color: #cac1c0;
     border-radius: 2px;
